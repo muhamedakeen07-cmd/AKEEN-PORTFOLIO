@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akeen - My Projects Portfolio</title>
+    
+    <style>
+        /* ============================================
+           VARIABLES & CORE STYLING
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Color palette - Dark theme with purple accent */
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #242424;
+            --accent-color: #b9f755;
+            --accent-light: #d8b4fe;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-tertiary: #808080;
+            --border-color: #333333;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ============================================
+           NAVIGATION BAR
+           ============================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-lg);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ============================================
+           PAGE HEADER
+           ============================================ */
+        .page-header {
+            margin-top: 70px;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-lg);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-bottom: var(--spacing-lg);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-button:hover {
+            color: var(--accent-light);
+            transform: translateX(-5px);
+        }
+
+        /* ============================================
+           PROJECT SECTION
+           ============================================ */
+        .project-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .project-section h2 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        /* ============================================
+           PROJECT CARD - LARGE VERSION
+           ============================================ */
+        .project-card-large {
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .project-card-large:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent-color);
+        }
+
+        .project-image-large {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            font-weight: 300;
+        }
+
+        .project-info-large {
+            padding: var(--spacing-lg);
+        }
+
+        .project-info-large h3 {
+            font-size: 1.4rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+
+        .project-info-large p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.7;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .project-tag {
+            display: inline-block;
+            background-color: var(--bg-tertiary);
+            color: var(--accent-light);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid var(--accent-color);
+        }
+
+        .project-buttons {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+
+        .project-btn {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-light);
+            color: var(--bg-primary);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        /* ============================================
+           FEATURED SECTION
+           ============================================ */
+        .featured-section {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-xl);
+            border-radius: 12px;
+            margin-bottom: var(--spacing-xl);
+            border: 2px solid var(--accent-color);
+        }
+
+        .featured-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-lg);
+            border: none;
+            padding: 0;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background-color: var(--bg-secondary);
+            text-align: center;
+            padding: var(--spacing-lg);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                background-color: var(--bg-secondary);
+                flex-direction: column;
+                width: 100%;
+                padding: var(--spacing-lg);
+                gap: var(--spacing-sm);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-buttons {
+                flex-direction: column;
+            }
+
+            .project-btn {
+                width: 100%;
+            }
+
+            .container {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .project-section h2 {
+                font-size: 1.4rem;
+            }
+
+            .project-image-large {
+                height: 200px;
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================
+         NAVIGATION BAR
+         ================================================ -->
+    <nav>
+        <a href="akeen_portfolio.html" class="nav-logo">Akeen</a>
+        <ul class="nav-links">
+            <li><a href="akeen_portfolio.html#about">About</a></li>
+            <li><a href="akeen_portfolio.html#skills">Skills</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="akeen_portfolio.html#brand">Brand</a></li>
+            <li><a href="akeen_portfolio.html#contact">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+
+    <!-- ================================================
+         PAGE HEADER
+         ================================================ -->
+    <div class="page-header">
+        <h1>My Projects</h1>
+        <p>Showcase of my work in content creation, design, and development</p>
+    </div>
+
+    <!-- ================================================
+         MAIN CONTENT
+         ================================================ -->
+    <div class="container">
+        <a href="akeen_portfolio.html" class="back-button">← Back to Home</a>
+
+        <!-- ================================================
+             CONTENT CREATION PROJECTS
+             ================================================ -->
+        <div class="project-section">
+            <h2>📹 Content Creation</h2>
+            
+            <!-- Project 1 -->
+            <div class="projects-grid">
+                <div class="project-card-large">
+                    <div class="project-image-large">📹</div>
+                    <div class="project-info-large">
+                        <h3>ST.CALGROSE Brand Content</h3>
+                        <div class="project-meta">
+                            <span class="project-tag">Video Content</span>
+                            <span class="project-tag">Brand</span>
+                        </div>
+                        <p>
+                            Engaging social media content and promotional videos for ST.CALGROSE, my streetwear brand. 
+                            I create videos that showcase products, tell brand stories, and build community engagement. 
+                            Each video is designed to hook viewers in the first 3 seconds using trending sounds and storytelling techniques.
+                        </p>
+                        <div class="project-buttons">
+                            <a href="https://instagram.com/st.calgrose" class="project-btn btn-primary">View on Instagram</a>
+                            <a href="#" class="project-btn btn-secondary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card-large">
+                    <div class="project-image-large">✨</div>
+                    <div class="project-info-large">
+                        <h3>Short-Form Videos (Reels & TikTok)</h3>
+                        <div class="project-meta">
+                            <span class="project-tag">TikTok</span>
+                            <span class="project-tag">Instagram Reels</span>
+                        </div>
+                        <p>
+                            Viral-focused short-form video content optimized for TikTok and Instagram Reels. 
+                            I specialize in creating hooks that grab attention immediately, using trending audios, 
+                            creative transitions, and authentic storytelling. Each video is strategically crafted 
+                            to maximize engagement and reach.
+                        </p>
+                        <div class="project-buttons">
+                            <a href="https://www.tiktok.com/@your_handle" class="project-btn btn-primary">View on TikTok</a>
+                            <a href="https://instagram.com/your_handle" class="project-btn btn-secondary">View Reels</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================
+             GRAPHIC DESIGN PROJECTS
+             ================================================ -->
+        <div class="project-section">
+            <h2>🎨 Graphic Design</h2>
+            
+            <!-- Project 3 -->
+            <div class="projects-grid">
+                <div class="project-card-large">
+                    <div class="project-image-large">🎨</div>
+                    <div class="project-info-large">
+                        <h3>Social Media Designs</h3>
+                        <div class="project-meta">
+                            <span class="project-tag">Canva</span>
+                            <span class="project-tag">Instagram</span>
+                        </div>
+                        <p>
+                            Custom-designed Instagram posts, stories, carousels, and reels covers created with Canva. 
+                            My designs focus on brand consistency, aesthetic appeal, and high engagement. 
+                            I design for both personal content and ST.CALGROSE brand promotions, always keeping 
+                            trending design elements in mind.
+                        </p>
+                        <div class="project-buttons">
+                            <a href="https://instagram.com/st.calgrose" class="project-btn btn-primary">View Designs</a>
+                            <a href="https://www.canva.com" class="project-btn btn-secondary">Design on Canva</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card-large">
+                    <div class="project-image-large">🎭</div>
+                    <div class="project-info-large">
+                        <h3>Branding Visuals</h3>
+                        <div class="project-meta">
+                            <span class="project-tag">Logo Design</span>
+                            <span class="project-tag">Brand Identity</span>
+                        </div>
+                        <p>
+                            Complete branding packages including logo concepts, color palettes, typography systems, 
+                            and brand guideline visuals. My work for ST.CALGROSE includes brand identity design that 
+                            reflects the streetwear culture and modern aesthetic. I also collaborate on branding for 
+                            other projects and creators.
+                        </p>
+                        <div class="project-buttons">
+                            <a href="https://instagram.com/st.calgrose" class="project-btn btn-primary">View Brand</a>
+                            <a href="#" class="project-btn btn-secondary">Brand Guidelines</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================
+             PYTHON DEVELOPMENT PROJECTS
+             ================================================ -->
+        <div class="project-section">
+            <h2>🧮 Python Development</h2>
+            
+            <!-- Project 5 -->
+            <div class="projects-grid">
+                <div class="project-card-large">
+                    <div class="project-image-large">🧮</div>
+                    <div class="project-info-large">
+                        <h3>Simple Calculator</h3>
+                        <div class="project-meta">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Beginner</span>
+                        </div>
+                        <p>
+                            A beginner-level Python project that performs basic arithmetic operations including addition, 
+                            subtraction, multiplication, and division. This project demonstrates fundamental programming 
+                            concepts like variables, functions, and user input handling. Clean, well-commented code 
+                            makes it perfect for learning.
+                        </p>
+                        <div class="project-buttons">
+                            <a href="https://github.com/your-username/calculator" class="project-btn btn-primary">View on GitHub</a>
+                            <a href="https://replit.com/@your-username/calculator" class="project-btn btn-secondary">Run on Replit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card-large">
+                    <div class="project-image-large">🔧</div>
+                    <div class="project-info-large">
+                        <h3>Mini Python Projects</h3>
+                        <div class="project-meta">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Collection</span>
+                        </div>
+                        <p>
+                            A collection of beginner-level Python projects including games, utilities, and learning exercises. 
+                            This includes projects like rock-paper-scissors game, number guessing game, password generator, 
+                            to-do list manager, and more. Each project helps me learn new programming concepts and best practices.
+                        </p>
+                        <div class="project-buttons">
+                            <a href="https://github.com/your-username" class="project-btn btn-primary">View on GitHub</a>
+                            <a href="https://replit.com/@your-username" class="project-btn btn-secondary">View on Replit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================
+             FEATURED SECTION
+             ================================================ -->
+        <div class="featured-section">
+            <h2>🌟 Currently Working On</h2>
+            <p style="margin-bottom: var(--spacing-md); color: var(--text-secondary);">
+                I'm always creating new content and learning new skills. Here are some things I'm focused on:
+            </p>
+            <ul style="list-style: none; color: var(--text-secondary);">
+                <li style="padding: var(--spacing-sm) 0;">✅ Growing ST.CALGROSE brand community and sales</li>
+                <li style="padding: var(--spacing-sm) 0;">✅ Mastering video editing with CapCut and advanced storytelling</li>
+                <li style="padding: var(--spacing-sm) 0;">✅ Building more Python projects for my portfolio</li>
+                <li style="padding: var(--spacing-sm) 0;">✅ Learning web development and front-end design</li>
+                <li style="padding: var(--spacing-sm) 0;">✅ Creating consistent, high-quality content daily</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- ================================================
+         FOOTER
+         ================================================ -->
+    <footer>
+        <p>&copy; 2024 Akeen. All rights reserved. | <a href="akeen_portfolio.html#contact" style="color: var(--accent-color); text-decoration: none;">Get In Touch</a></p>
+    </footer>
+
+    <!-- ================================================
+         JAVASCRIPT
+         ================================================ -->
+    <script>
+        // Toggle mobile navigation menu
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
