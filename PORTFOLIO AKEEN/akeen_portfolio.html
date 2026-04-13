@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akeen - Content Creator & Developer</title>
+    
+    <style>
+        /* ============================================
+           VARIABLES & CORE STYLING
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Color palette - Dark theme with purple accent */
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #242424;
+            --accent-color: #a4b61d; /* Modern purple */
+            --accent-light: #d8b4fe;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-tertiary: #808080;
+            --border-color: #333333;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            
+            /* Spacing & Typography */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Smooth scrolling for navigation */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ============================================
+           NAVIGATION BAR
+           ============================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-lg);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile navigation toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--spacing-xl);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-sm);
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .hero-tagline {
+            font-size: 1.1rem;
+            color: var(--accent-light);
+            margin-bottom: var(--spacing-lg);
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3);
+        }
+
+        /* ============================================
+           SECTION STYLING
+           ============================================ */
+        section {
+            padding: var(--spacing-xl) var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        .about {
+            background-color: var(--bg-secondary);
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            line-height: 1.8;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* ============================================
+           SKILLS SECTION
+           ============================================ */
+        .skills {
+            background-color: var(--bg-primary);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .skill-category {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .skill-category h3 {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: var(--spacing-xs) 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-list li::before {
+            content: '→';
+            color: var(--accent-color);
+            margin-right: var(--spacing-sm);
+            font-weight: bold;
+        }
+
+        /* ============================================
+           PROJECTS SECTION
+           ============================================ */
+        .projects {
+            background-color: var(--bg-secondary);
+        }
+
+        .project-categories {
+            margin-top: var(--spacing-lg);
+        }
+
+        .project-category {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .project-category h3 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .project-card {
+            background-color: var(--bg-tertiary);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent-color);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: 300;
+        }
+
+        .project-info {
+            padding: var(--spacing-lg);
+        }
+
+        .project-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+
+        .project-info p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.6;
+        }
+
+        .project-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .project-button:hover {
+            background-color: var(--accent-light);
+            color: var(--bg-primary);
+        }
+
+        /* ============================================
+           BRAND SECTION
+           ============================================ */
+        .brand {
+            background-color: var(--bg-primary);
+        }
+
+        .brand-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+            margin-top: var(--spacing-lg);
+        }
+
+        .brand-text h3 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .brand-text p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .brand-tagline {
+            font-size: 1.3rem;
+            color: var(--accent-light);
+            font-style: italic;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .brand-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            font-weight: 300;
+        }
+
+        /* ============================================
+           SOCIAL LINKS SECTION
+           ============================================ */
+        .social {
+            background-color: var(--bg-secondary);
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            transition: var(--transition);
+            border: 2px solid var(--border-color);
+        }
+
+        .social-link:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* ============================================
+           CONTACT SECTION
+           ============================================ */
+        .contact {
+            background-color: var(--bg-primary);
+            text-align: center;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .contact-email {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-bottom: var(--spacing-lg);
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .contact-email:hover {
+            color: var(--accent-light);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background-color: var(--bg-secondary);
+            text-align: center;
+            padding: var(--spacing-lg);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 768px) {
+            /* Navigation adjustments */
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                background-color: var(--bg-secondary);
+                flex-direction: column;
+                width: 100%;
+                padding: var(--spacing-lg);
+                gap: var(--spacing-sm);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            /* Hero section adjustments */
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .hero {
+                padding: var(--spacing-lg);
+            }
+
+            /* Section title adjustments */
+            section h2 {
+                font-size: 2rem;
+            }
+
+            /* Brand content adjustments */
+            .brand-content {
+                grid-template-columns: 1fr;
+            }
+
+            /* Skills grid adjustments */
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            /* Projects grid adjustments */
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Social links spacing */
+            .social-links {
+                gap: var(--spacing-md);
+            }
+
+            /* General padding on mobile */
+            section {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+
+            nav {
+                padding: var(--spacing-sm) var(--spacing-md);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-tagline {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            .brand-text h3 {
+                font-size: 1.5rem;
+            }
+
+            .nav-logo {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================
+         NAVIGATION BAR
+         ================================================ -->
+    <nav>
+        <a href="#" class="nav-logo">Akeen</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#brand">Brand</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+
+    <!-- ================================================
+         HERO SECTION
+         Hero: Name, title, tagline, and CTA button
+         ================================================ -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>Akeen</h1>
+            <p> Software Engineer Student</p>
+            <div class="hero-tagline">Building brands through content and code</div>
+            <button class="cta-button" onclick="scrollToProjects()">View My Work</button>
+        </div>
+    </section>
+
+    <!-- ================================================
+         ABOUT SECTION
+         About: Short bio about the student
+         ================================================ -->
+    <section class="about" id="about">
+        <h2>About Me</h2>
+        <p>
+            I am a student passionate about content creation, branding, and technology. 
+            I run my own clothing brand <strong>ST.CALGROSE</strong> and create engaging social media content. 
+            I am currently learning Python and building projects while growing my creative and business skills.
+        </p>
+    </section>
+
+    <!-- ================================================
+         SKILLS SECTION
+         Skills: Categorized into Content, Design, Development
+         ================================================ -->
+    <section class="skills" id="skills">
+        <h2>Skills</h2>
+        <div class="skills-container">
+            <!-- Content Creation Category -->
+            <div class="skill-category">
+                <h3>Content Creation</h3>
+                <ul class="skill-list">
+                    <li>Video Editing (CapCut)</li>
+                    <li>Content Strategy</li>
+                    <li>Hooks & Storytelling</li>
+                    <li>Copywriting</li>
+                </ul>
+            </div>
+
+            <!-- Design Category -->
+            <div class="skill-category">
+                <h3>Design</h3>
+                <ul class="skill-list">
+                    <li>Canva Design</li>
+                    <li>Social Media Posts</li>
+                    <li>Branding Visuals</li>
+                </ul>
+            </div>
+
+            <!-- Development Category -->
+            <div class="skill-category">
+                <h3>Development</h3>
+                <ul class="skill-list">
+                    <li>Python (Beginner)</li>
+                    <li>HTML & CSS</li>
+                    <li>Problem Solving</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================
+         PROJECTS SECTION
+         Projects: Split into three categories with cards
+         ================================================ -->
+    <section class="projects" id="projects">
+        <h2>Projects</h2>
+        <div class="project-categories">
+
+            <!-- Content Creation Projects -->
+            <div class="project-category">
+                <h3>Content Creation</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">📹</div>
+                        <div class="project-info">
+                            <h4>ST.CALGROSE Clothing Brand Content</h4>
+                            <p>Engaging social media content and promotional videos for my streetwear brand, showcasing products and building community.</p>
+                           <button onclick="location.href='akeen_my_conform.html'" class="project-button">View Project</button> </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">✨</div>
+                        <div class="project-info">
+                            <h4>Short-Form Videos</h4>
+                            <p>Reels and TikTok style content designed to hook viewers in the first 3 seconds with creative storytelling and trends.</p>
+                            <button class="project-button">View Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graphic Design Projects -->
+            <div class="project-category">
+                <h3>Graphic Design</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">🎨</div>
+                        <div class="project-info">
+                            <h4>Social Media Designs</h4>
+                            <p>Custom Instagram posts, stories, and feed designs created with Canva for personal and brand promotions.</p>
+                            <button class="project-button">View Project</button>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">🎭</div>
+                        <div class="project-info">
+                            <h4>Branding Visuals</h4>
+                            <p>Logo concepts, brand palettes, and visual identity designs for ST.CALGROSE and collaborative projects.</p>
+                            <button class="project-button">View Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Python Projects -->
+            <div class="project-category">
+                <h3>Python Projects</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">🧮</div>
+                        <div class="project-info">
+                            <h4>Simple Calculator</h4>
+                            <p>A beginner-level Python calculator project that performs basic arithmetic operations with clean code structure.</p>
+                            <button class="project-button">View Project</button>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">🔧</div>
+                        <div class="project-info">
+                            <h4>Mini Projects</h4>
+                            <p>Collection of beginner-level Python projects including games, utilities, and learning exercises.</p>
+                            <button class="project-button">View Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================================================
+         BRAND SECTION
+         Brand: Highlight ST.CALGROSE clothing brand
+         ================================================ -->
+    <section class="brand" id="brand">
+        <h2>My Brand: ST.CALGROSE</h2>
+        <div class="brand-content">
+            <div class="brand-text">
+                <h3>Where Culture Meets the Street</h3>
+                <p class="brand-tagline">ST.CALGROSE</p>
+                <p>
+                    ST.CALGROSE is my streetwear brand built on the foundation of cultural expression and authentic storytelling. 
+                    It's more than just clothing—it's a movement blending street culture with meaningful design. 
+                    Through content creation and community engagement, I'm building a brand that resonates with people who value creativity, authenticity, and style.
+                </p>
+            </div>
+            <div class="brand-image">
+    <div class="brand-image">
+    <img src="ST.LOGO.png" alt="ST.CALGROSE Logo" style="width: 500px; height: 500px; object-fit: contain;">
+</div>
+</div>
+        </div>
+    </section>
+
+    <!-- ================================================
+         SOCIAL LINKS SECTION
+         Social: Links to Instagram, TikTok, LinkedIn
+         ================================================ -->
+    <section class="social" id="social">
+        <h2>Connect With Me</h2>
+        <div class="social-links">
+            <a href="https://instagram.com" class="social-link" title="Instagram - Content">📷</a>
+            <a href="https://instagram.com" class="social-link" title="Instagram - Brand">🛍️</a>
+            <a href="https://tiktok.com" class="social-link" title="TikTok">🎬</a>
+            <a href="https://linkedin.com" class="social-link" title="LinkedIn">💼</a>
+        </div>
+    </section>
+
+    <!-- ================================================
+         CONTACT SECTION
+         Contact: Call to action and email
+         ================================================ -->
+    <section class="contact" id="contact">
+        <h2>Get In Touch</h2>
+        <p>Open to internships and collaboration opportunities</p>
+        <a href="mailto:muhamedakeen07@gmail.com" class="contact-email">📧 muhamedakeen07@gmail.com</a>
+    </section>
+
+    <!-- ================================================
+         FOOTER
+         Footer: Simple footer with copyright
+         ================================================ -->
+    <footer>
+        <p>&copy; 2024 Akeen. All rights reserved. | Built with code and creativity.</p>
+    </footer>
+
+    <!-- ================================================
+         JAVASCRIPT - INTERACTIVE FEATURES
+         ================================================ -->
+    <script>
+        // Toggle mobile navigation menu
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Smooth scroll to projects section when CTA button is clicked
+        function scrollToProjects() {
+            document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Add active class to nav links based on scroll position
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            // Update active nav link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.style.color = 'var(--text-secondary)';
+                if (link.getAttribute('href') === '#' + current) {
+                    link.style.color = 'var(--accent-color)';
+                }
+            });
+        });
+
+        // Optional: Add click handlers to project buttons
+        document.querySelectorAll('.project-button').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('This project link would take you to more details. Update these links with actual project URLs!');
+            });
+        });
+    </script>
+
+</body>
+</html>
